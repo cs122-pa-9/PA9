@@ -4,6 +4,8 @@
 #include <string>
 #include "Pieces.hpp"
 #include "Point.hpp"
+#include <ctime>
+#include <cstdlib>
 
 //This file is used to define and draw the chess board.
 

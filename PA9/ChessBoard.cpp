@@ -1,19 +1,73 @@
 #include "ChessBoard.hpp"
 
+// sets up the board with random pieces except for kings
 
-// sets up the board
 Board::Board() {
-	for (int i = 0; i < 8; i++) {
-		this->boardPieces[1][i] = new Pawn('b', 'P', 1, i);
-		this->boardPieces[6][i] = new Pawn('w', 'p', 6, i);
 
-		this->boardPieces[0][i] = new Pawn('b', 'P', 0, i);
-		this->boardPieces[7][i] = new Pawn('w', 'p', 7, i);
+	srand(time(NULL));
+
+	this->boardPieces[0][3] = new King('b', 'K', 0, 3);
+	this->boardPieces[7][4] = new King('w', 'k', 7, 4);
+
+	for (int i = 0; i < 2; i++) {
+		for (int j = 0; j < 8; j++) {
+
+			if (!(i == 0 && j == 3)) {
+				int randNum = rand() % 5;
+
+				switch (randNum) {
+				case 0:
+					this->boardPieces[i][j] = new Pawn('b', 'P', i, j);
+					break;
+				case 1:
+					this->boardPieces[i][j] = new Knight('b', 'N', i, j);
+					break;
+				case 2:
+					this->boardPieces[i][j] = new Queen('b', 'Q', i, j);
+					break;
+				case 3:
+					this->boardPieces[i][j] = new Rook('b', 'R', i, j);
+					break;
+				case 4:
+					this->boardPieces[i][j] = new Bishop('b', 'B', i, j);
+					break;
+				}
+			}
+		}
 	}
+
 
 	for (int i = 2; i < 6; i++) {
 		for (int j = 0; j < 8; j++) {
 			this->boardPieces[i][j] = nullptr;
+		}
+	}
+
+
+	for (int i = 6; i < 8; i++) {
+		for (int j = 0; j < 8; j++) {
+
+			if (!(i == 7 && j == 4)) {
+				int randNum = rand() % 5;
+
+				switch (randNum) {
+				case 0:
+					this->boardPieces[i][j] = new Pawn('w', 'P', i, j);
+					break;
+				case 1:
+					this->boardPieces[i][j] = new Knight('w', 'N', i, j);
+					break;
+				case 2:
+					this->boardPieces[i][j] = new Queen('w', 'Q', i, j);
+					break;
+				case 3:
+					this->boardPieces[i][j] = new Rook('w', 'R', i, j);
+					break;
+				case 4:
+					this->boardPieces[i][j] = new Bishop('w', 'B', i, j);
+					break;
+				}
+			}
 		}
 	}
 }
