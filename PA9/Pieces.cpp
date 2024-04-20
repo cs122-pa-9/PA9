@@ -86,7 +86,7 @@ King::King(char col, char c, int x, int y) {
 }
 
 int King::findMoves(Point(&arr)[30], Piece* boardArr[8][8]) {
-
+	return 0;
 }
 
 
@@ -107,7 +107,7 @@ Queen::Queen(char col, char c, int x, int y) {
 }
 
 int Queen::findMoves(Point(&arr)[30], Piece* boardArr[8][8]) {
-
+	return 0;
 }
 
 
@@ -128,7 +128,7 @@ Bishop::Bishop(char col, char c, int x, int y) {
 }
 
 int Bishop::findMoves(Point(&arr)[30], Piece* boardArr[8][8]) {
-
+	return 0;
 }
 
 
@@ -149,7 +149,7 @@ Rook::Rook(char col, char c, int x, int y) {
 }
 
 int Rook::findMoves(Point(&arr)[30], Piece* boardArr[8][8]) {
-
+	return 0;
 }
 
 
@@ -170,7 +170,7 @@ Knight::Knight(char col, char c, int x, int y) {
 }
 
 int Knight::findMoves(Point(&arr)[30], Piece* boardArr[8][8]) {
-
+	return 0;
 }
 
 
@@ -192,6 +192,7 @@ Pawn::Pawn(char col, char c, int x, int y) {
 
 int Pawn::findMoves(Point(&arr)[30], Piece* boardArr[8][8]) {
 	if (isFirstMove) {
-
+		return 0;
 	}
+	return 0;
 }

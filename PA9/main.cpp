@@ -14,6 +14,7 @@ int main()
         sf::Event event;
         while (window.pollEvent(event))
         {
+
             if (event.type == sf::Event::MouseButtonReleased) {
                 int x = event.mouseButton.x;
                 int y = event.mouseButton.y;
@@ -21,12 +22,14 @@ int main()
                 Point b = board.findLocation(x, y);
                 std::cout << b.getX() << ", " << b.getY() << "\n";
             }
+
             if (event.type == sf::Event::Closed)
                 window.close();
         }
 
         window.clear();
         window.draw(chessBoardImage);
+        board.drawBoardState(window);
         window.display();
     }
 
