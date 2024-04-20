@@ -18,7 +18,7 @@ public:
 
     Board();
 
-    void drawBoardState(sf::RenderWindow window);
+    void drawBoardState(sf::RenderWindow& window);
 
     Point findLocation(int inputX, int inputY);
 };

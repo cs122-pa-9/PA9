@@ -4,6 +4,14 @@
 // sets up the board
 Board::Board() {
 	for (int i = 0; i < 8; i++) {
+		this->boardPieces[1][i] = new Pawn('b', 'P', 1, i);
+		this->boardPieces[6][i] = new Pawn('w', 'p', 6, i);
+
+		this->boardPieces[0][i] = new Pawn('b', 'P', 0, i);
+		this->boardPieces[7][i] = new Pawn('w', 'p', 7, i);
+	}
+
+	for (int i = 2; i < 6; i++) {
 		for (int j = 0; j < 8; j++) {
 			this->boardPieces[i][j] = nullptr;
 		}
@@ -11,7 +19,7 @@ Board::Board() {
 }
 
 //drawBoardState takes a 2d array which represents the current state of the chess board and displays it on the board
-void Board::drawBoardState(sf::RenderWindow window) {
+void Board::drawBoardState(sf::RenderWindow& window) {
 	for (int i = 0; i < 8; i++) {
 		for (int j = 0; j < 8; j++) {
 			if (this->boardPieces[i][j] != nullptr) {
