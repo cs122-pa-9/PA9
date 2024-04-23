@@ -38,7 +38,7 @@ int main()
         
         //board.drawBoardState(window);
         //window.display();
-        window.clear();
+        //window.clear();
     }
 
     return 0;

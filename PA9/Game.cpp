@@ -1,4 +1,5 @@
 #include "Game.hpp"
+#include <windows.h>
 
 Game::Game(sf::RenderWindow& w, sf::Event& e) : window(w), event(e) {
 
@@ -20,6 +21,7 @@ void Game::runTurn() {
 				pieceSelected = true;
 			}
 
+			std::cout << b.getX() << ", " << b.getY() << "\n";
 			std::cout << b.getX() << ", " << b.getY() << "\n";
 		}
 
@@ -47,13 +49,13 @@ void Game::runGame() {
 
 	this->board.drawBoardState(this->window);
 
+	window.display();
+
 	while (true) {
 
 		runTurn();
-
+	
 		this->board.drawBoardState(this->window);
-
-		window.display();
 
 		if (isCheckmate()) {
 			if (this->turn == 'w') {
