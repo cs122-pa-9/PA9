@@ -19,24 +19,23 @@ Piece::Piece(char c, char col, int x, int y) {
 
 Piece::~Piece() {};
 
-// what happens when the piece is clicked
-bool Piece::actionOnClick(sf::Event event, Piece* boardArr[8][8]) {
+// checks if a given move is valid
+bool Piece::validMove(Point p, Piece* boardArr[8][8]) {
 
+	// array for possible moves
 	Point moves[30];
 	int options = findMoves(moves, boardArr);
 
-	if (event.type == sf::Event::MouseButtonReleased) {
-		int mouseY = event.mouseButton.x / 100;
-		int mouseX = event.mouseButton.y / 100;
-		for (int i = 0; i < options; i++) {
-			if (moves[i].getX() == mouseX && moves[i].getY() == mouseY) {
-				return true;
-			}
+	int mouseY = p.getY();
+	int mouseX = p.getX();
+	for (int i = 0; i < options; i++) {
+		if (moves[i].getX() == mouseX && moves[i].getY() == mouseY) {
+			return true;
 		}
 	}
-
 	return false;
 }
+
 
 // getters
 char Piece::getPiece() {
@@ -86,7 +85,25 @@ King::King(char col, char c, int x, int y) {
 }
 
 int King::findMoves(Point(&arr)[30], Piece* boardArr[8][8]) {
-	return 0;
+
+	int x = getLocation().getX();
+	int y = getLocation().getY();
+
+	static const int moves[8][2] = { {-1, -1}, {-1, 0}, {-1, 1}, {0, -1}, {0, 1}, {1, -1}, {1, 0}, {1, 1} };
+	int count = 0;
+
+	for (int i = 0; i < 8; ++i) {
+		int new_x = x + moves[i][0];
+		int new_y = y + moves[i][1];
+
+		if (new_x >= 0 && new_x < 8 && new_y >= 0 && new_y < 8) { // Check bounds
+			Piece* target = boardArr[new_x][new_y];
+			if (!target || target->getColor() != this->getColor()) { // Spot is empty or contains an opponent
+				arr[count++] = { new_x, new_y }; // Store the move
+			}
+		}
+	}
+	return count;
 }
 
 
@@ -128,7 +145,83 @@ Bishop::Bishop(char col, char c, int x, int y) {
 }
 
 int Bishop::findMoves(Point(&arr)[30], Piece* boardArr[8][8]) {
-	return 0;
+	int numPossibleMoves = 0;
+	int x = getLocation().getX(); //get coords of bishop
+	int y = getLocation().getY();
+
+	for (int i = 1; i < 8; i++) { //check diagonally top left
+		int checkX = x - i;
+		int checkY = y - i;
+
+		//check if in bounds of board
+		if (checkX < 0 || checkX >= 8 || checkY < 0 || checkY >= 8) {
+			break;
+		}
+		if (boardArr[checkX][checkY] == nullptr) { //check if there is no piece
+			arr[numPossibleMoves++] = Point(checkX, checkY);
+		}
+		//check if there is an enemy piece
+		else if (boardArr[checkX][checkY]->getColor() != this->getColor()) {
+			arr[numPossibleMoves++] = Point(checkX, checkY);
+			break;
+		}
+		else { //there must be a friendly piece
+			break;
+		}
+	}
+	for (int i = 1; i < 8; i++) { //check diagonally top right
+		int checkX = x - i;
+		int checkY = y + i;
+		if (checkX < 0 || checkX >= 8 || checkY < 0 || checkY >= 8) {
+			break;
+		}
+		if (boardArr[checkX][checkY] == nullptr) {
+			arr[numPossibleMoves++] = Point(checkX, checkY);
+		}
+		else if (boardArr[checkX][checkY]->getColor() != this->getColor()) {
+			arr[numPossibleMoves++] = Point(checkX, checkY);
+			break;
+		}
+		else {
+			break;
+		}
+	}
+	for (int i = 1; i < 8; i++) { //check diagonally bottom left
+		int checkX = x + i;
+		int checkY = y - i;
+		if (checkX < 0 || checkX >= 8 || checkY < 0 || checkY >= 8) {
+			break;
+		}
+		if (boardArr[checkX][checkY] == nullptr) {
+			arr[numPossibleMoves++] = Point(checkX, checkY);
+		}
+		else if (boardArr[checkX][checkY]->getColor() != this->getColor()) {
+			arr[numPossibleMoves++] = Point(checkX, checkY);
+			break;
+		}
+		else {
+			break;
+		}
+	}
+	for (int i = 1; i < 8; i++) { //check diagonally bottom right
+		int checkX = x + i;
+		int checkY = y + i;
+		if (checkX < 0 || checkX >= 8 || checkY < 0 || checkY >= 8) {
+			break;
+		}
+		if (boardArr[checkX][checkY] == nullptr) {
+			arr[numPossibleMoves++] = Point(checkX, checkY);
+		}
+		else if (boardArr[checkX][checkY]->getColor() != this->getColor()) {
+			arr[numPossibleMoves++] = Point(checkX, checkY);
+			break;
+		}
+		else {
+			break;
+		}
+	}
+
+	return numPossibleMoves;
 }
 
 
@@ -191,8 +284,6 @@ Pawn::Pawn(char col, char c, int x, int y) {
 }
 
 int Pawn::findMoves(Point(&arr)[30], Piece* boardArr[8][8]) {
-	if (isFirstMove) {
-		return 0;
-	}
+
 	return 0;
 }
