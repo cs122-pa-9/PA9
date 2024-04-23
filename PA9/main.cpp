@@ -1,4 +1,4 @@
-#include "ChessBoard.hpp"
+#include "Game.hpp"
 
 int main()
 {
@@ -7,12 +7,21 @@ int main()
     boardTexture.loadFromFile("chessboard.jpg");
     sf::Sprite chessBoardImage(boardTexture);
 
-    Board board;
+    //Board board;
 
     while (window.isOpen())
     {
+
         sf::Event event;
-        while (window.pollEvent(event))
+
+        Game chessGame(window, event);
+
+        window.draw(chessBoardImage);
+
+        chessGame.runGame();
+        
+
+       /*while (window.pollEvent(event))
         {
 
             if (event.type == sf::Event::MouseButtonReleased) {
@@ -25,12 +34,11 @@ int main()
 
             if (event.type == sf::Event::Closed)
                 window.close();
-        }
-
-        window.clear();
-        window.draw(chessBoardImage);
-        board.drawBoardState(window);
-        window.display();
+        }*/
+        
+        //board.drawBoardState(window);
+        //window.display();
+        //window.clear();
     }
 
     return 0;

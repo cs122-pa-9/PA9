@@ -25,7 +25,7 @@ public:
 
 	~Piece();
 
-	bool actionOnClick(sf::Event event, Piece* boardArr[8][8]);      // checks if action can happen when piece is clicked 
+	bool validMove(Point p, Piece* boardArr[8][8]);      // checks if action can happen when piece is clicked 
 
 	virtual int findMoves(Point(&arr)[30], Piece* boardArr[8][8]) = 0;     // finds the list of points where the piece can move to
 
@@ -98,8 +98,6 @@ public:
 
 // the pawn piece
 class Pawn : public Piece {
-private:
-	bool isFirstMove = true;
 
 public:
 	Pawn(char col, char c, int x, int y);

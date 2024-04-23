@@ -11,10 +11,8 @@
 
 class Board{
 
-private:
-    void move(Piece* piece, Point p);     // executes a move
-
 public:
+
 
     Piece* boardPieces[8][8];
 
@@ -23,4 +21,6 @@ public:
     void drawBoardState(sf::RenderWindow& window);
 
     Point findLocation(int inputX, int inputY);
+
+    void move(Piece* piece, Point p);     // executes a move
 };
