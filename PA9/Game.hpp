@@ -9,6 +9,7 @@ private:
 
 	Point b;
 	bool pieceSelected = false;
+	bool turnFinished = false;
 
 	Board board;
 

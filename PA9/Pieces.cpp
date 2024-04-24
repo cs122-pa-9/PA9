@@ -108,27 +108,6 @@ int King::findMoves(Point(&arr)[30], Piece* boardArr[8][8]) {
 
 
 
-Queen::Queen(char col, char c, int x, int y) {
-	this->setColor(col);
-	this->setPiece(c);
-	this->setLocation(x, y);
-
-	if (this->getColor() == 'b') {
-		this->Texture.loadFromFile("bqueen.png");
-	}
-	else {
-		this->Texture.loadFromFile("wqueen.png");
-	}
-
-	this->Sprite.setTexture(this->Texture);
-}
-
-int Queen::findMoves(Point(&arr)[30], Piece* boardArr[8][8]) {
-	return 0;
-}
-
-
-
 Bishop::Bishop(char col, char c, int x, int y) {
 	this->setColor(col);
 	this->setPiece(c);
@@ -242,8 +221,256 @@ Rook::Rook(char col, char c, int x, int y) {
 }
 
 int Rook::findMoves(Point(&arr)[30], Piece* boardArr[8][8]) {
-	return 0;
+	int numPossibleMoves = 0;
+	int x = getLocation().getX(); //get coords of rook
+	int y = getLocation().getY();
+
+	for (int i = 1; i < 8; i++) { //check up
+		int checkX = x - i;
+		int checkY = y;
+
+		//check if in bounds of board
+		if (checkX < 0 || checkX >= 8 || checkY < 0 || checkY >= 8) {
+			break;
+		}
+		if (boardArr[checkX][checkY] == nullptr) { //check if there is no piece
+			arr[numPossibleMoves++] = Point(checkX, checkY);
+		}
+		//check if there is an enemy piece
+		else if (boardArr[checkX][checkY]->getColor() != this->getColor()) {
+			arr[numPossibleMoves++] = Point(checkX, checkY);
+			break;
+		}
+		else { //there must be a friendly piece
+			break;
+		}
+	}
+	for (int i = 1; i < 8; i++) { //check right
+		int checkX = x;
+		int checkY = y + i;
+		if (checkX < 0 || checkX >= 8 || checkY < 0 || checkY >= 8) {
+			break;
+		}
+		if (boardArr[checkX][checkY] == nullptr) {
+			arr[numPossibleMoves++] = Point(checkX, checkY);
+		}
+		else if (boardArr[checkX][checkY]->getColor() != this->getColor()) {
+			arr[numPossibleMoves++] = Point(checkX, checkY);
+			break;
+		}
+		else {
+			break;
+		}
+	}
+	for (int i = 1; i < 8; i++) { //check left
+		int checkX = x;
+		int checkY = y - i;
+		if (checkX < 0 || checkX >= 8 || checkY < 0 || checkY >= 8) {
+			break;
+		}
+		if (boardArr[checkX][checkY] == nullptr) {
+			arr[numPossibleMoves++] = Point(checkX, checkY);
+		}
+		else if (boardArr[checkX][checkY]->getColor() != this->getColor()) {
+			arr[numPossibleMoves++] = Point(checkX, checkY);
+			break;
+		}
+		else {
+			break;
+		}
+	}
+	for (int i = 1; i < 8; i++) { //check down
+		int checkX = x + i;
+		int checkY = y;
+		if (checkX < 0 || checkX >= 8 || checkY < 0 || checkY >= 8) {
+			break;
+		}
+		if (boardArr[checkX][checkY] == nullptr) {
+			arr[numPossibleMoves++] = Point(checkX, checkY);
+		}
+		else if (boardArr[checkX][checkY]->getColor() != this->getColor()) {
+			arr[numPossibleMoves++] = Point(checkX, checkY);
+			break;
+		}
+		else {
+			break;
+		}
+	}
+
+	return numPossibleMoves;
 }
+
+
+
+
+Queen::Queen(char col, char c, int x, int y) {
+	this->setColor(col);
+	this->setPiece(c);
+	this->setLocation(x, y);
+
+	if (this->getColor() == 'b') {
+		this->Texture.loadFromFile("bqueen.png");
+	}
+	else {
+		this->Texture.loadFromFile("wqueen.png");
+	}
+
+	this->Sprite.setTexture(this->Texture);
+}
+
+int Queen::findMoves(Point(&arr)[30], Piece* boardArr[8][8]) {
+
+	int numPossibleMoves = 0;
+	int x = getLocation().getX(); //get coords of rook
+	int y = getLocation().getY();
+
+	for (int i = 1; i < 8; i++) { //check up
+		int checkX = x - i;
+		int checkY = y;
+
+		//check if in bounds of board
+		if (checkX < 0 || checkX >= 8 || checkY < 0 || checkY >= 8) {
+			break;
+		}
+		if (boardArr[checkX][checkY] == nullptr) { //check if there is no piece
+			arr[numPossibleMoves++] = Point(checkX, checkY);
+		}
+		//check if there is an enemy piece
+		else if (boardArr[checkX][checkY]->getColor() != this->getColor()) {
+			arr[numPossibleMoves++] = Point(checkX, checkY);
+			break;
+		}
+		else { //there must be a friendly piece
+			break;
+		}
+	}
+	for (int i = 1; i < 8; i++) { //check right
+		int checkX = x;
+		int checkY = y + i;
+		if (checkX < 0 || checkX >= 8 || checkY < 0 || checkY >= 8) {
+			break;
+		}
+		if (boardArr[checkX][checkY] == nullptr) {
+			arr[numPossibleMoves++] = Point(checkX, checkY);
+		}
+		else if (boardArr[checkX][checkY]->getColor() != this->getColor()) {
+			arr[numPossibleMoves++] = Point(checkX, checkY);
+			break;
+		}
+		else {
+			break;
+		}
+	}
+	for (int i = 1; i < 8; i++) { //check left
+		int checkX = x;
+		int checkY = y - i;
+		if (checkX < 0 || checkX >= 8 || checkY < 0 || checkY >= 8) {
+			break;
+		}
+		if (boardArr[checkX][checkY] == nullptr) {
+			arr[numPossibleMoves++] = Point(checkX, checkY);
+		}
+		else if (boardArr[checkX][checkY]->getColor() != this->getColor()) {
+			arr[numPossibleMoves++] = Point(checkX, checkY);
+			break;
+		}
+		else {
+			break;
+		}
+	}
+	for (int i = 1; i < 8; i++) { //check down
+		int checkX = x + i;
+		int checkY = y;
+		if (checkX < 0 || checkX >= 8 || checkY < 0 || checkY >= 8) {
+			break;
+		}
+		if (boardArr[checkX][checkY] == nullptr) {
+			arr[numPossibleMoves++] = Point(checkX, checkY);
+		}
+		else if (boardArr[checkX][checkY]->getColor() != this->getColor()) {
+			arr[numPossibleMoves++] = Point(checkX, checkY);
+			break;
+		}
+		else {
+			break;
+		}
+	}
+
+	for (int i = 1; i < 8; i++) { //check diagonally top left
+		int checkX = x - i;
+		int checkY = y - i;
+
+		//check if in bounds of board
+		if (checkX < 0 || checkX >= 8 || checkY < 0 || checkY >= 8) {
+			break;
+		}
+		if (boardArr[checkX][checkY] == nullptr) { //check if there is no piece
+			arr[numPossibleMoves++] = Point(checkX, checkY);
+		}
+		//check if there is an enemy piece
+		else if (boardArr[checkX][checkY]->getColor() != this->getColor()) {
+			arr[numPossibleMoves++] = Point(checkX, checkY);
+			break;
+		}
+		else { //there must be a friendly piece
+			break;
+		}
+	}
+	for (int i = 1; i < 8; i++) { //check diagonally top right
+		int checkX = x - i;
+		int checkY = y + i;
+		if (checkX < 0 || checkX >= 8 || checkY < 0 || checkY >= 8) {
+			break;
+		}
+		if (boardArr[checkX][checkY] == nullptr) {
+			arr[numPossibleMoves++] = Point(checkX, checkY);
+		}
+		else if (boardArr[checkX][checkY]->getColor() != this->getColor()) {
+			arr[numPossibleMoves++] = Point(checkX, checkY);
+			break;
+		}
+		else {
+			break;
+		}
+	}
+	for (int i = 1; i < 8; i++) { //check diagonally bottom left
+		int checkX = x + i;
+		int checkY = y - i;
+		if (checkX < 0 || checkX >= 8 || checkY < 0 || checkY >= 8) {
+			break;
+		}
+		if (boardArr[checkX][checkY] == nullptr) {
+			arr[numPossibleMoves++] = Point(checkX, checkY);
+		}
+		else if (boardArr[checkX][checkY]->getColor() != this->getColor()) {
+			arr[numPossibleMoves++] = Point(checkX, checkY);
+			break;
+		}
+		else {
+			break;
+		}
+	}
+	for (int i = 1; i < 8; i++) { //check diagonally bottom right
+		int checkX = x + i;
+		int checkY = y + i;
+		if (checkX < 0 || checkX >= 8 || checkY < 0 || checkY >= 8) {
+			break;
+		}
+		if (boardArr[checkX][checkY] == nullptr) {
+			arr[numPossibleMoves++] = Point(checkX, checkY);
+		}
+		else if (boardArr[checkX][checkY]->getColor() != this->getColor()) {
+			arr[numPossibleMoves++] = Point(checkX, checkY);
+			break;
+		}
+		else {
+			break;
+		}
+	}
+
+	return numPossibleMoves;
+}
+
 
 
 
@@ -262,8 +489,27 @@ Knight::Knight(char col, char c, int x, int y) {
 	this->Sprite.setTexture(this->Texture);
 }
 
+
 int Knight::findMoves(Point(&arr)[30], Piece* boardArr[8][8]) {
-	return 0;
+	int count = 0;
+	int x = getLocation().getX();
+	int y = getLocation().getY();
+	const char cColor = boardArr[x][y]->getColor();
+	int moves[8][2] = { {-2, -1}, {-1, -2}, {1, -2}, {2, -1}, {2, 1}, {1, 2}, {-1, 2}, {-2, 1} };
+
+	for (int i = 0; i < 8; ++i) {
+		int direction_x = moves[i][0];
+		int direction_y = moves[i][1];
+		int new_x = getLocation().getX() + direction_x;
+		int new_y = getLocation().getY() + direction_y;
+
+		if (new_x >= 0 && new_x < 8 && new_y >= 0 && y < 8) {
+			if (boardArr[new_x][new_y]->getPiece() == 0 || boardArr[new_x][new_y]->getPiece() != cColor) {
+				arr[count++] = Point(new_x, new_y);
+			}
+		}
+	}
+	return count;
 }
 
 

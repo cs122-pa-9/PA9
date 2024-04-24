@@ -28,8 +28,12 @@ void Game::runTurn() {
 
 			if (board.boardPieces[b.getX()][b.getY()]->validMove(p, this->board.boardPieces)) {
 				this->board.move(board.boardPieces[b.getX()][b.getY()], p);
+				this->turnFinished = true;
 			}
 			this->pieceSelected = false;
+		}
+
+		if (turnFinished) {
 			break;
 		}
 	}
@@ -48,6 +52,7 @@ void Game::runGame() {
 
 	while (true) {
 
+		this->turnFinished = false;
 		runTurn();
 	
 		this->board.drawBoardState(this->window);

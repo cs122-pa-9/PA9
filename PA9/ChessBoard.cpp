@@ -6,9 +6,11 @@ Board::Board() {
 
 	srand(time(NULL));
 
+	// initialize the kings in a set location
 	this->boardPieces[0][3] = new King('b', 'K', 0, 3);
 	this->boardPieces[7][4] = new King('w', 'k', 7, 4);
 
+	// loops to initalize the board with random pieces for black
 	for (int i = 0; i < 2; i++) {
 		for (int j = 0; j < 8; j++) {
 
@@ -36,14 +38,14 @@ Board::Board() {
 		}
 	}
 
-
+	// loops to set unoccupied spaces on the board to null
 	for (int i = 2; i < 6; i++) {
 		for (int j = 0; j < 8; j++) {
 			this->boardPieces[i][j] = nullptr;
 		}
 	}
 
-
+	// loops to initalize the board with random pieces for black
 	for (int i = 6; i < 8; i++) {
 		for (int j = 0; j < 8; j++) {
 

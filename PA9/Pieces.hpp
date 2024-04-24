@@ -53,17 +53,6 @@ public:
 
 
 
-// the queen piece
-class Queen : public Piece {
-
-public:
-	Queen(char col, char c, int x, int y);
-
-	int findMoves(Point(&arr)[30], Piece* boardArr[8][8]);
-};
-
-
-
 // the bishop piece
 class Bishop : public Piece {
 
@@ -79,6 +68,17 @@ class Rook : public Piece {
 
 public:
 	Rook(char col, char c, int x, int y);
+
+	int findMoves(Point(&arr)[30], Piece* boardArr[8][8]);
+};
+
+
+
+// the queen piece
+class Queen : public Piece{
+
+public:
+	Queen(char col, char c, int x, int y);
 
 	int findMoves(Point(&arr)[30], Piece* boardArr[8][8]);
 };
