@@ -3,9 +3,7 @@
 int main()
 {
     sf::RenderWindow window(sf::VideoMode(800, 800), "chess 2 electric boogaloo");
-    sf::Texture boardTexture;
-    boardTexture.loadFromFile("chessboard.jpg");
-    sf::Sprite chessBoardImage(boardTexture);
+
 
     //Board board;
 
@@ -16,7 +14,7 @@ int main()
 
         Game chessGame(window, event);
 
-        window.draw(chessBoardImage);
+        
 
         chessGame.runGame();
         

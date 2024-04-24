@@ -6,10 +6,8 @@ Game::Game(sf::RenderWindow& w, sf::Event& e) : window(w), event(e) {
 }
 
 void Game::runTurn() {
-	Point b;
-	bool pieceSelected = false;
 
-	while (window.pollEvent(this->event))
+	while (window.waitEvent(this->event))
 	{
 		if (this->event.type == sf::Event::MouseButtonReleased && !pieceSelected) {
 			int x = this->event.mouseButton.x;
@@ -22,7 +20,7 @@ void Game::runTurn() {
 			}
 
 			std::cout << b.getX() << ", " << b.getY() << "\n";
-			std::cout << b.getX() << ", " << b.getY() << "\n";
+			continue;
 		}
 
 		if (this->event.type == sf::Event::MouseButtonReleased && pieceSelected) {
@@ -30,11 +28,9 @@ void Game::runTurn() {
 
 			if (board.boardPieces[b.getX()][b.getY()]->validMove(p, this->board.boardPieces)) {
 				this->board.move(board.boardPieces[b.getX()][b.getY()], p);
-				break;
 			}
-			else {
-				pieceSelected = false;
-			}
+			this->pieceSelected = false;
+			break;
 		}
 	}
 }
@@ -48,7 +44,6 @@ bool Game::isCheckmate() {
 void Game::runGame() {
 
 	this->board.drawBoardState(this->window);
-
 	window.display();
 
 	while (true) {
@@ -56,6 +51,7 @@ void Game::runGame() {
 		runTurn();
 	
 		this->board.drawBoardState(this->window);
+		window.display();
 
 		if (isCheckmate()) {
 			if (this->turn == 'w') {
