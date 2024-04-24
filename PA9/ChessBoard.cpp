@@ -74,6 +74,12 @@ Board::Board() {
 
 //drawBoardState takes a 2d array which represents the current state of the chess board and displays it on the board
 void Board::drawBoardState(sf::RenderWindow& window) {
+	sf::Texture boardTexture;
+	boardTexture.loadFromFile("chessboard.jpg");
+	sf::Sprite chessBoardImage(boardTexture);
+
+	window.draw(chessBoardImage);
+
 	for (int i = 0; i < 8; i++) {
 		for (int j = 0; j < 8; j++) {
 			if (this->boardPieces[i][j] != nullptr) {

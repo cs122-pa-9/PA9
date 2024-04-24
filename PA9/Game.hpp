@@ -7,6 +7,9 @@ private:
 	sf::Event& event;
 	sf::RenderWindow& window;
 
+	Point b;
+	bool pieceSelected = false;
+
 	Board board;
 
 	void runTurn();
