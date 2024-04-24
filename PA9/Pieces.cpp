@@ -494,17 +494,17 @@ int Knight::findMoves(Point(&arr)[30], Piece* boardArr[8][8]) {
 	int count = 0;
 	int x = getLocation().getX();
 	int y = getLocation().getY();
-	const char cColor = boardArr[x][y]->getColor();
 	int moves[8][2] = { {-2, -1}, {-1, -2}, {1, -2}, {2, -1}, {2, 1}, {1, 2}, {-1, 2}, {-2, 1} };
 
 	for (int i = 0; i < 8; ++i) {
 		int direction_x = moves[i][0];
 		int direction_y = moves[i][1];
-		int new_x = getLocation().getX() + direction_x;
-		int new_y = getLocation().getY() + direction_y;
+		int new_x = x + direction_x;
+		int new_y = y + direction_y;
 
-		if (new_x >= 0 && new_x < 8 && new_y >= 0 && y < 8) {
-			if (boardArr[new_x][new_y]->getPiece() == 0 || boardArr[new_x][new_y]->getPiece() != cColor) {
+		if (new_x >= 0 && new_x < 8 && new_y >= 0 && new_y < 8) {
+			Piece* target = boardArr[new_x][new_y];
+			if (target == nullptr || target->getColor() != this->getColor()) {
 				arr[count++] = Point(new_x, new_y);
 			}
 		}
@@ -530,6 +530,31 @@ Pawn::Pawn(char col, char c, int x, int y) {
 }
 
 int Pawn::findMoves(Point(&arr)[30], Piece* boardArr[8][8]) {
+	int count = 0;
+	int movingDirection = (getColor() == 'w') ? -1 : 1;
+	int startRow = (getColor() == 'w') ? 6 : 1;
+	int x = getLocation().getX();
+	int y = getLocation().getY();
+	int new_x = x + movingDirection;
 
-	return 0;
+	if (new_x >= 0 && new_x < 8 && boardArr[new_x][y] == nullptr) {
+		arr[count++] = Point(new_x, y);
+	}
+
+	int possibleMoving[2] = { -1, 1 };
+	for (int i = 0; i < 2; i++) {
+		int new_y = y + possibleMoving[i];
+		if (new_y >= 0 && new_y < 8) {
+			Piece* target = boardArr[new_x][new_y];
+			if (target != nullptr && target->getColor() != this->getColor()) {//oblique attack
+				arr[count++] = Point(new_x, new_y);
+			}
+			else if (x == ((getColor() == 'w') ? 3 : 4) && boardArr[x][new_y] != nullptr &&
+				boardArr[x][new_y]->getPiece() == 'P' && boardArr[x][new_y]->getColor() != getColor()) {// Allow passers-by to attack
+				arr[count++] = Point(new_x, new_y);
+			}
+		}
+	}
+
+	return count;
 }
