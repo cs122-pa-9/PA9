@@ -9,3 +9,7 @@ Ziang Chen                011839374        ziang.chen@wsu.edu                 3 
 Kaeden Peterson           011858249       kaeden.peterson@wsu.edu             2              Mason Menser
 
 Giovanni Munoz            011799726       g.munozhernandez@wsu.edu            7             Zachary Adelson
+
+
+link to demo
+https://youtu.be/uGC_iygjEYM

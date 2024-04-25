@@ -8,7 +8,11 @@ public:
 
 	void testKnightMoves();
 
-	bool testFindLocation(int mouseX, int mouseY, Point& expectedResult);
+	void testKingMoves();
+
+	void testRookMoves();
+
+	bool testFindLocation(int mouseX, int mouseY, Point expectedResult);
 
 
 };
