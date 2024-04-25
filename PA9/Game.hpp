@@ -15,9 +15,9 @@ private:
 
 	void runTurn();
 
-	bool isCheck();
+	bool isCheck(char checkThisColor, Piece* boardArr[8][8]);
 
-	bool isCheckmate();
+	bool isCheckmate(char checkThisColor, Piece* boardArr[8][8]);
 
 public:
 

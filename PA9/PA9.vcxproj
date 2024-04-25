@@ -143,12 +143,17 @@
     <ClCompile Include="Game.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Pieces.cpp" />
+    <ClCompile Include="test.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ChessBoard.hpp" />
     <ClInclude Include="Game.hpp" />
     <ClInclude Include="Pieces.hpp" />
     <ClInclude Include="Point.hpp" />
+    <ClInclude Include="test.hpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="Readme.txt" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
