@@ -139,6 +139,8 @@ bool Game::isCheckmate(char checkThisColor, Piece* boardArr[8][8]) {
 }
 
 
+
+// rungame function written by me (ziang)
 void Game::runGame() {
 
 	this->board.drawBoardState(this->window);
