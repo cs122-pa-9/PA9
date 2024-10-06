@@ -2,6 +2,7 @@
 
 // sets up the board with random pieces except for kings
 
+// this whole class was written by me (ziang chen)
 Board::Board() {
 
 	srand(time(NULL));
