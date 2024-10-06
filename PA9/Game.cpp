@@ -6,6 +6,7 @@ Game::Game(sf::RenderWindow& w, sf::Event& e) : window(w), event(e) {
 }
 
 // runs a turn
+// run turn function written by me (Ziang)
 void Game::runTurn() {
 
 	while (window.waitEvent(this->event))
