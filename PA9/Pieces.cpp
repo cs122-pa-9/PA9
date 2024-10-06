@@ -1,5 +1,6 @@
 #include "Pieces.hpp"
 
+// pieces class written by me (ziang)
 // constructors
 Piece::Piece() {
 	this->piece = ',';
@@ -66,7 +67,7 @@ void Piece::setLocation(int x, int y) {
 
 
 
-
+//constructors for each piece were written by me, the findMoves for each piece was not
 
 
 King::King(char col, char c, int x, int y) {
